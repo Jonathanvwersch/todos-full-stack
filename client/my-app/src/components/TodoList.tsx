@@ -1,10 +1,12 @@
 import React, { useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { TodosContext } from "../contexts/TodosContext";
 
 interface TodoListProps {}
 
 export const TodoList: React.FC<TodoListProps> = ({}) => {
   const { todos, setTodos } = useContext(TodosContext);
+  const history = useHistory();
 
   useEffect(() => {
     (async function () {
@@ -30,6 +32,11 @@ export const TodoList: React.FC<TodoListProps> = ({}) => {
         })
       );
     } catch (err) {}
+  };
+
+  const handleUpdate = async (e: any, id: number) => {
+    e.stopPropagation();
+    history.push(`/todos/${id}/update`);
   };
 
   return (
@@ -58,6 +65,7 @@ export const TodoList: React.FC<TodoListProps> = ({}) => {
                     <td className="text-center">
                       <button
                         type="button"
+                        onClick={(e) => handleUpdate(e, todo.id)}
                         className="border border-yello-500 bg-yellow-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline"
                       >
                         Update

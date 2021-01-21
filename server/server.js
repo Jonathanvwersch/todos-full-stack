@@ -60,11 +60,11 @@ app.post("/api/v1/todos", async (req, res) => {
 
 
 // Update todos
-app.put("/api/v1/todos/:id", async (req, res) => {
+app.put("/api/v1/todos/:id/update", async (req, res) => {
     try {
         const results = await db.query(
-            "UPDATE todos SET todo=$1 RETURNING *",
-            [req.body.todo]
+            "UPDATE todos SET todo=$1 WHERE id=$2 RETURNING *",
+            [req.body.todo, req.params.id]
         )
         res.status(200).json({
             status:"success",

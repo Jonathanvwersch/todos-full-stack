@@ -14,7 +14,7 @@ function App() {
             <Route exact path="/" component={Home}>
               <Home />
             </Route>
-            <Route exact path="/todos/:id" component={UpdateTodos}>
+            <Route exact path="/todos/:id/update" component={UpdateTodos}>
               <UpdateTodos />
             </Route>
           </Switch>
